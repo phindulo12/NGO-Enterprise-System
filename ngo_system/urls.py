@@ -23,11 +23,12 @@ from . import views
 
 
 urlpatterns = [
-    # path('', home, name='home'),
+    path('', views.home_redirect, name='home'),
     path('admin/', admin.site.urls),
     path('dashboard/project-manager/',views.project_manager_dashboard, name = 'project_manager_dashboard' ),
     path('dashboard/accountant/',views.accountant_dashboard, name = 'accountant_dashboard' ),
     path('dashboard/reporter/',views.reporter_dashboard, name = 'reporter_dashboard' ),
     path('accounts/', include('accounts.urls')),
-    path('dashboard/staff/',views.staff_dashboard, name = 'staff_dashboard' )
+    path('dashboard/staff/',views.staff_dashboard, name = 'staff_dashboard' ),
+    path('accounting/', include('accounting.urls'))
 ]

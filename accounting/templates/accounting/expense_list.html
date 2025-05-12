@@ -1,0 +1,7 @@
+<h2>Expenses</h2>
+<a href="{% url 'expense_create' %}">Add New Expense</a>
+<ul>
+  {% for expense in expenses %}
+    <li>{{ expense.description }} - R{{ expense.amount }}</li>
+  {% endfor %}
+</ul>

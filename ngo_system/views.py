@@ -1,6 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from accounts.decorators import role_required
-from django.shortcuts import render
+from django.shortcuts import render,redirect,HttpResponse
+
+
+def home_redirect(request):
+    return HttpResponse('Welcome to the NGO ENTERPRISE') 
 
 @login_required
 @role_required(allowed_roles=['admin'])

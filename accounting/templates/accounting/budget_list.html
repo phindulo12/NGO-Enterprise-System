@@ -1,0 +1,7 @@
+<h2>Budgets</h2>
+<a href="{% url 'budget_create' %}">Add New Budget</a>
+<ul>
+  {% for budget in budgets %}
+    <li>{{ budget.project }} - R{{ budget.allocated_amount }}</li>
+  {% endfor %}
+</ul>
