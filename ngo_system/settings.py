@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'accounting',
     'ubuntu_project',
+    'import_export',
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,46 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Budget, Expense
+from .models import data, Budget, Expense
 from .forms import BudgetForm, ExpenseForm
+from tablib import Dataset
+from .resources import DataResource
+
+
+def importExcel(request):
+    if request.method =='POST':
+
+        if 'data' not in request.FILES:
+            messages.error(request, "No file uploaded.")
+            # return redirect('')  
+
+        data_resource = DataResource()
+        dataset = Dataset
+        new_data = request.FILES['data']
+
+        imported_Data = dataset.load(new_data.read(), format ='xlsx' )
+
+        for i in imported_Data:
+            value = data(
+                i[0],
+                i[1],
+                i[2],
+                i[3],
+                i[4], 
+                i[5], 
+                i[6], 
+                i[7], 
+                i[8],
+                i[9],
+
+            )
+            value.save
+
+    
+    return render(request,'accounting/AddData.html')
+
+
+
 
 def is_accountant(user):
     return user.groups.filter(name='accountant').exists()
@@ -9,7 +48,7 @@ def is_accountant(user):
 @login_required
 @user_passes_test(is_accountant)
 def accountant_dashboard(request):
-    return render(request, 'accounting/dashboard.html')
+    return render(request, 'accounting/dashboards.html')
 
 # @login_required
 # @user_passes_test(is_accountant)

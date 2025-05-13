@@ -28,3 +28,15 @@ class Expense(models.Model):
 
     def __str__(self):
         return f"{self.category} - {self.amount}"
+
+class data(models.Model):
+        Quarter = models.CharField(max_length =100)
+        Month = models.CharField(max_length =100)
+        Month_calender = models.CharField(max_length =100)
+        Budget_Line = models.CharField(max_length =100)
+        SDA = models.CharField(max_length =100)
+        description = models.CharField(max_length =100)
+        Cost_Category = models.CharField(max_length =100)
+        Budget = models.CharField(max_length =100)
+        Actual = models.CharField(max_length =100)
+        Varience = models.CharField(max_length =100)
