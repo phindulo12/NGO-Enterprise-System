@@ -30,5 +30,6 @@ urlpatterns = [
     path('dashboard/reporter/',views.reporter_dashboard, name = 'reporter_dashboard' ),
     path('accounts/', include('accounts.urls')),
     path('dashboard/staff/',views.staff_dashboard, name = 'staff_dashboard' ),
-    path('accounting/', include('accounting.urls'))
+    path('accounting/', include('accounting.urls')),
+    path('ubuntu/', include('ubuntu_project.urls'))
 ]

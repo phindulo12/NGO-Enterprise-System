@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubuntu Project Dashboard</title>
+</head>
+<body>
+    <h1>Ubuntu Project Dashboard</h1>
+
+    <h2>Total Budget</h2>
+    <p>R{{ total_budget }}</p>
+
+    <h2>Total Expenses</h2>
+    <p>R{{ total_expenses }}</p>
+
+    <h2>Remaining Budget</h2>
+    <p>R{{ remaining_budget }}</p>
+
+    <h3>Budgets</h3>
+    <ul>
+        {% for budget in budgets %}
+            <li>{{ budget.project }}: R{{ budget.allocated_amount }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Expenses</h3>
+    <ul>
+        {% for expense in expenses %}
+            <li>{{ expense.description }}: R{{ expense.amount }} (Incurred by: {{ expense.incurred_by.username }})</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'budget_create' %}">Add Budget</a>
+    <a href="{% url 'expense_create' %}">Add Expense</a>
+</body>
+</html>
