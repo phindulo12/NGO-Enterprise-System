@@ -1,5 +1,11 @@
 from django import forms
-from .models import Budget, Expense
+from .models import Budget, Expense, data
+
+
+class dataForm(forms.ModelForm):
+    class Meta:
+        model = data
+        fields = '__all__'
 
 class BudgetForm(forms.ModelForm):
     class Meta:
