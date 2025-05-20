@@ -5,39 +5,40 @@ from .models import data, Budget, Expense
 from .forms import BudgetForm, ExpenseForm
 from tablib import Dataset
 from .resources import DataResource
+from .data_cleaning import Data_Cleaner
 
 
 def importExcel(request):
-    if request.method =='POST':
-
+    if request.method == 'POST':
         if 'data' not in request.FILES:
             messages.error(request, "No file uploaded.")
-            # return redirect('')  
+            return render(request, 'accounting/AddData.html')
 
         data_resource = DataResource()
-        dataset = Dataset
+        dataset = Dataset()
         new_data = request.FILES['data']
 
-        imported_Data = dataset.load(new_data.read(), format ='xlsx' )
+        # Save uploaded file temporarily
+        with open('temp_uploaded_file.xlsx', 'wb+') as temp:
+            for chunk in new_data.chunks():
+                temp.write(chunk)
+
+        # Clean the uploaded file
+        cleaned_path = Data_Cleaner('temp_uploaded_file.xlsx')
+
+        # Read cleaned file and load it into tablib
+        with open(cleaned_path, 'rb') as f:
+            imported_Data = dataset.load(f.read(), format='xlsx')
 
         for i in imported_Data:
             value = data(
-                i[0],
-                i[1],
-                i[2],
-                i[3],
-                i[4], 
-                i[5], 
-                i[6], 
-                i[7], 
-                i[8],
-                i[9],
-
+                i[0], i[1], i[2], i[3], i[4], 
+                i[5], i[6], i[7], i[8], i[9],
             )
-            value.save
+            value.save()  # Fixed
 
-    
-    return render(request,'accounting/AddData.html')
+    return render(request, 'accounting/AddData.html')
+
 
 
 
